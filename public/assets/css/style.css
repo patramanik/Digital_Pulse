@@ -1,0 +1,678 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fff;
+    color: #000;
+}
+
+/* Sticky Navigation */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    box-shadow: 0 1px 5px rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.2rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links .active-link {
+    color: #ccc;
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    width: 25px;
+    height: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+/* Animate to X */
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background-color: #000;
+        display: none;
+        text-align: center;
+        border-top: 1px solid #222;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+/* Hero Section */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 2rem;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #fff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: transparent;
+    color: #fff;
+    border-color: #fff;
+}
+
+/* Footer */
+.footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #000;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+/* Contact Page */
+.contact-section {
+    padding: 3rem 2rem;
+    text-align: center;
+    background-color: #fff;
+    color: #000;
+    min-height: 80vh;
+}
+
+.contact-container {
+    max-width: 600px;
+    margin: auto;
+}
+
+.contact-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.contact-container p {
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    color: #444;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 0.75rem;
+    border: 1px solid #000;
+    background: #fff;
+    color: #000;
+    font-size: 1rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #333;
+}
+
+.response-text {
+    margin-top: 1rem;
+    color: green;
+    font-weight: bold;
+}
+
+/* SEO Service Page */
+.seo-section {
+    background-color: #fff;
+    color: #000;
+    padding: 4rem 2rem;
+    text-align: center;
+    min-height: 80vh;
+}
+
+.seo-container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.seo-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.seo-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    color: #444;
+}
+
+.seo-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.seo-card {
+    border: 1px solid #000;
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+    background-color: #fff;
+}
+
+.seo-card:hover {
+    transform: translateY(-5px);
+    background-color: #000;
+    color: #fff;
+}
+
+.seo-card h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.3rem;
+}
+
+/* Social Media Marketing Page */
+.smm-section {
+    padding: 4rem 2rem;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    min-height: 80vh;
+}
+
+.smm-container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.smm-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.smm-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    color: #ccc;
+}
+
+.smm-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.smm-feature {
+    border: 1px solid #fff;
+    padding: 1.5rem;
+    transition: background 0.3s ease, color 0.3s ease;
+    background-color: #000;
+    color: #fff;
+}
+
+.smm-feature:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.smm-feature h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.3rem;
+}
+
+/* PR Agent Page */
+.pr-section {
+    background-color: #fff;
+    color: #000;
+    padding: 4rem 2rem;
+    text-align: center;
+    min-height: 80vh;
+}
+
+.pr-container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.pr-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.pr-subtitle {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 3rem;
+}
+
+.pr-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.pr-box {
+    border: 1px solid #000;
+    padding: 1.5rem;
+    background-color: #fff;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.pr-box:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.pr-box h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.3rem;
+}
+
+/* Our Work Page */
+.work-section {
+    background-color: #fff;
+    color: #000;
+    padding: 4rem 2rem;
+    min-height: 80vh;
+    text-align: center;
+}
+
+.work-container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.work-subtitle {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.work-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.work-form input,
+.work-form textarea {
+    padding: 0.75rem;
+    border: 1px solid #000;
+    font-size: 1rem;
+}
+
+.work-form input:focus,
+.work-form textarea:focus {
+    outline: none;
+    border-color: #222;
+}
+
+.work-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.work-card {
+    padding: 1rem;
+    border: 1px solid #000;
+    background-color: #f9f9f9;
+    text-align: left;
+    position: relative;
+}
+
+.work-card button {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 0.9rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* About Us Page */
+.about-section {
+    background-color: #000;
+    color: #fff;
+    padding: 4rem 2rem;
+    min-height: 80vh;
+    text-align: center;
+}
+
+.about-container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.about-container h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.about-tagline {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 3rem;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    text-align: left;
+}
+
+.about-left h2,
+.about-right h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.about-left p,
+.about-right ul {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.about-right ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about-right li {
+    margin-bottom: 0.75rem;
+}
+
+/* Our Services Page */
+.service-section {
+    background-color: #000;
+    color: #fff;
+    padding: 4rem 2rem;
+    min-height: 80vh;
+    text-align: center;
+}
+
+.service-container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.service-subtitle {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 2rem;
+}
+
+.service-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.service-form input,
+.service-form textarea {
+    padding: 0.75rem;
+    border: 1px solid #fff;
+    background-color: #000;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.service-form input:focus,
+.service-form textarea:focus {
+    outline: none;
+    border-color: #999;
+}
+
+.service-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.service-card {
+    padding: 1rem;
+    border: 1px solid #fff;
+    background-color: #111;
+    text-align: left;
+    position: relative;
+}
+
+.service-card button {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 0.9rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Career Page */
+.career-section {
+    background-color: #fff;
+    color: #000;
+    padding: 4rem 2rem;
+    min-height: 80vh;
+    text-align: center;
+}
+
+.career-container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.career-subtitle {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.career-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.career-form input,
+.career-form textarea {
+    padding: 0.75rem;
+    border: 1px solid #000;
+    font-size: 1rem;
+}
+
+.career-form input:focus,
+.career-form textarea:focus {
+    outline: none;
+    border-color: #222;
+}
+
+.career-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.career-card {
+    padding: 1rem;
+    border: 1px solid #000;
+    background-color: #f9f9f9;
+    text-align: left;
+    position: relative;
+}
+
+.career-card button {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 0.9rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Influencer Marketing Page */
+.influencer-section {
+    background-color: #000;
+    color: #fff;
+    padding: 4rem 2rem;
+    text-align: center;
+    min-height: 80vh;
+}
+
+.influencer-container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.influencer-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.influencer-subtitle {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 3rem;
+}
+
+.influencer-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.influencer-card {
+    border: 1px solid #fff;
+    padding: 1.5rem;
+    background-color: #111;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.influencer-card:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
