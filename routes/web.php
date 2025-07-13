@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminDashbordController;
+use App\Http\Controllers\CareerController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\WorkController;
 
@@ -82,6 +83,27 @@ Route::controller(ServicesController::class)->prefix('admin')->middleware('auth'
 
     // Delete an existing service
     Route::delete('/delete-service/{id}', 'destroy')->name('admin.services.delete');
+});
+
+
+Route::controller(CareerController::class)->prefix('admin')->middleware('auth')->group(function () {
+    // List all careers
+    Route::get('/careers', 'index')->name('admin.careers.list');
+
+    // Show form to add new career
+    Route::get('/add-career', 'create')->name('admin.careers.add');
+
+    // Store new career
+    Route::post('/careers/add', 'store')->name('admin.careers.store');
+
+    // Show form to edit existing career
+    Route::get('/edit-career/{id}', 'edit')->name('admin.careers.edit');
+
+    // Update existing career
+    Route::put('/update-career/{id}', 'update')->name('admin.careers.update');
+
+    // Delete existing career
+    Route::delete('/delete-career/{id}', 'destroy')->name('admin.careers.delete');
 });
 
 
