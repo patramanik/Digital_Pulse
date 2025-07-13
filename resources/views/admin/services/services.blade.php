@@ -9,7 +9,7 @@
             <div class="card-title">Add Service</div>
         </div>
         <div class="card-body">
-            <form action="{{ route('services.store') }}" method="POST">
+            <form action="#" method="POST">
             @csrf
             <div class="form-group" style="margin-bottom: 15px;">
                 <label for="title">Title</label>
