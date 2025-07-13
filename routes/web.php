@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminDashbordController;
+use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\WorkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,16 +42,49 @@ Route::controller(HomeController::class)->group(function (){
 
 
 
-// Route::controller(SubjectController::class)->group(function () {
-//     Route::prefix('admin')->group(function () {
-//         Route::get('/subject', 'index')->name('admin.subject.subject');
-//         Route::get('/addSubject', 'create')->name('admin.subject.add-subject');
-//         Route::Post('/subject/add', 'store');
-//         Route::get('/edit-subject/{id}', 'edit')->name('admin.subject.edit-subject');
-//         Route::put('/update-subject/{id}', 'update');
-//         Route::delete('/delete-subject/{id}', 'deleteSubject');
-//     });
-// })->middleware('auth');
+
+
+Route::controller(WorkController::class)->prefix('admin')->middleware('auth')->group(function () {
+    // Show all works
+    Route::get('/works', 'index')->name('admin.works.list');
+
+    // Show form to create a new work
+    Route::get('/add-work', 'create')->name('admin.works.add');
+
+    // Store a new work
+    Route::post('/works/add', 'store')->name('admin.works.store');
+
+    // Show form to edit an existing work
+    Route::get('/edit-work/{id}', 'edit')->name('admin.works.edit');
+
+    // Update an existing work
+    Route::put('/update-work/{id}', 'update')->name('admin.works.update');
+
+    // Delete an existing work
+    Route::delete('/delete-work/{id}', 'destroy')->name('admin.works.delete');
+});
+
+Route::controller(ServicesController::class)->prefix('admin')->middleware('auth')->group(function () {
+    // Show all services
+    Route::get('/services', 'index')->name('admin.services.list');
+
+    // Show form to create a new service
+    Route::get('/add-service', 'create')->name('admin.services.add');
+
+    // Store a new service
+    Route::post('/services/add', 'store')->name('admin.services.store');
+
+    // Show form to edit an existing service
+    Route::get('/edit-service/{id}', 'edit')->name('admin.services.edit');
+
+    // Update an existing service
+    Route::put('/update-service/{id}', 'update')->name('admin.services.update');
+
+    // Delete an existing service
+    Route::delete('/delete-service/{id}', 'destroy')->name('admin.services.delete');
+});
+
+
 
 
 
