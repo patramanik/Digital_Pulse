@@ -1,3 +1,15 @@
+/* Color Variables */
+:root {
+    --color-black: #000;
+    --color-white: #fff;
+    --color-gray: #ccc;
+    --color-dark-gray: #222;
+    --color-light-gray: #f9f9f9;
+    --color-mid-gray: #444;
+    --color-card-gray: #111;
+    --color-red: red;
+}
+
 /* General Reset */
 * {
     margin: 0;
@@ -7,17 +19,21 @@
 
 body {
     font-family: 'Segoe UI', sans-serif;
-    background-color: #fff;
-    color: #000;
+    background-color: var(--color-white);
+    color: var(--color-white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
+
 
 /* Sticky Navigation */
 .navbar {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: #000;
-    color: #fff;
+    background-color: var(--color-black);
+    color: var(--color-white);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -37,7 +53,7 @@ body {
 }
 
 .nav-links a {
-    color: white;
+    color: var(--color-white);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
@@ -45,7 +61,7 @@ body {
 
 .nav-links a:hover,
 .nav-links .active-link {
-    color: #ccc;
+    color: var(--color-gray);
 }
 
 /* Hamburger Menu */
@@ -64,7 +80,7 @@ body {
     display: block;
     width: 100%;
     height: 3px;
-    background: white;
+    background: var(--color-white);
     transition: all 0.3s ease;
 }
 
@@ -89,7 +105,7 @@ body {
         left: 0;
         right: 0;
         flex-direction: column;
-        background-color: #000;
+    background-color: var(--color-black);
         display: none;
         text-align: center;
         border-top: 1px solid #222;
@@ -110,8 +126,8 @@ body {
     align-items: center;
     justify-content: center;
     height: 90vh;
-    background-color: #000;
-    color: #fff;
+    background-color: var(--color-black);
+    color: var(--color-white);
     text-align: center;
     padding: 2rem;
 }
@@ -131,9 +147,9 @@ body {
 
 .cta-btn {
     padding: 0.75rem 1.5rem;
-    background-color: #fff;
-    color: #000;
-    border: 2px solid #fff;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border: 2px solid var(--color-white);
     font-weight: bold;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -141,17 +157,24 @@ body {
 
 .cta-btn:hover {
     background-color: transparent;
-    color: #fff;
-    border-color: #fff;
+    color: var(--color-white);
+    border-color: var(--color-white);
 }
 
 /* Footer */
+/* Sticky Footer */
 .footer {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--color-black);
+    color: var(--color-white);
     text-align: center;
     padding: 1rem;
+    margin-bottom: 0;
+    width: 100%;
+    flex-shrink: 0;
+    position: relative;
+    bottom: 0;
 }
+
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -197,7 +220,7 @@ body {
 .contact-container p {
     margin-bottom: 2rem;
     font-size: 1rem;
-    color: #444;
+    color: var(--color-mid-gray);
 }
 
 .contact-form {
@@ -539,7 +562,7 @@ body {
 }
 
 .service-cards {
-    display: grid;
+    background-color: var(--color-card-gray);
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1.5rem;
 }
@@ -654,7 +677,7 @@ body {
 }
 
 .influencer-cards {
-    display: grid;
+    background-color: var(--color-card-gray);
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 2rem;
     margin-bottom: 2.5rem;
@@ -676,3 +699,132 @@ body {
 html {
     scroll-behavior: smooth;
 }
+
+/* Ensure main content grows to fill space above footer */
+.main-content {
+    flex: 1 0 auto;
+}
+
+
+/* Responsive Enhancements */
+@media (max-width: 1024px) {
+    .hero-content h1,
+    .seo-container h1,
+    .smm-container h1,
+    .pr-container h1,
+    .about-container h1,
+    .contact-container h1 {
+        font-size: 2.2rem;
+    }
+    .about-grid {
+        gap: 1.5rem;
+    }
+    .seo-cards,
+    .smm-features,
+    .pr-columns,
+    .work-cards,
+    .service-cards,
+    .career-cards,
+    .influencer-cards {
+        gap: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section,
+    .seo-section,
+    .smm-section,
+    .pr-section,
+    .work-section,
+    .about-section,
+    .service-section,
+    .career-section,
+    .influencer-section,
+    .contact-section {
+        padding: 2rem 1rem;
+        min-height: 60vh;
+    }
+    .hero-content h1,
+    .seo-container h1,
+    .smm-container h1,
+    .pr-container h1,
+    .about-container h1,
+    .contact-container h1 {
+        font-size: 1.5rem;
+    }
+    .hero-content p,
+    .seo-subtitle,
+    .smm-subtitle,
+    .pr-subtitle,
+    .about-tagline,
+    .contact-container p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    .seo-cards,
+    .smm-features,
+    .pr-columns,
+    .work-cards,
+    .service-cards,
+    .career-cards,
+    .influencer-cards {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        text-align: center;
+    }
+    .work-form,
+    .service-form,
+    .career-form,
+    .contact-form {
+        gap: 0.5rem;
+    }
+    .navbar {
+        flex-direction: column;
+        padding: 0.5rem 1rem;
+    }
+    .nav-links {
+        gap: 0.5rem;
+    }
+    .footer {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section,
+    .seo-section,
+    .smm-section,
+    .pr-section,
+    .work-section,
+    .about-section,
+    .service-section,
+    .career-section,
+    .influencer-section,
+    .contact-section {
+        padding: 1rem 0.5rem;
+    }
+    .hero-content h1,
+    .seo-container h1,
+    .smm-container h1,
+    .pr-container h1,
+    .about-container h1,
+    .contact-container h1 {
+        font-size: 1.1rem;
+    }
+    .navbar {
+        padding: 0.3rem 0.5rem;
+    }
+    .footer {
+        padding: 0.3rem;
+        font-size: 0.8rem;
+    }
+    .nav-links {
+        gap: 0.3rem;
+    }
+}
+
