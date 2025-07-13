@@ -58,9 +58,9 @@ Route::post('/delete-commend/{id}', [AdminDashbordController::class, 'deletComme
 ->middleware('auth')->name('deletecommend');
 
 // Admin Routes
-Route::get('dashboard', [AdminDashbordController::class, 'index'])
+Route::get('admin', [AdminDashbordController::class, 'index'])
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    ->name('admin');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
