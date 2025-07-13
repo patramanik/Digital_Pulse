@@ -1,7 +1,6 @@
 @extends('layouts.master')
 @section('title', 'Digital Pulse-Dashbord')
 @section('content')
-
         <!-- Content -->
         <div class="content">
             <!-- Stats Cards -->
@@ -164,25 +163,3 @@
         });
     </script>
 @endsection
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Pulse-Dashbord</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/admin-style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-</head>
-<body>
-
-
-</body>
-</html>
