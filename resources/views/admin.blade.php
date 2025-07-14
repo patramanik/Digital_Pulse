@@ -99,23 +99,6 @@
         </div> -->
     </div>
 
-    <!-- Chart Section -->
-    <div class="chart-container">
-        <div class="chart-header">
-            <div class="chart-title">Revenue Overview</div>
-            <div>
-                <select style="padding: 6px 10px; border-radius: 5px; border: 1px solid #ddd; font-size: 14px;">
-                    <option>Last 7 Days</option>
-                    <option>Last 30 Days</option>
-                    <option selected>Last 90 Days</option>
-                </select>
-            </div>
-        </div>
-        <div
-            style="height: 250px; background-color: #f9f9f9; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
-            <p style="color: var(--gray);">Chart would be displayed here</p>
-        </div>
-    </div>
 
     <!-- Recent Activity -->
     <div class="activity-list">
@@ -130,26 +113,70 @@
                 <div class="activity-time">15 minutes ago</div>
             </div>
         </div> -->
+
         @if(isset($contacts) && count($contacts))
         @foreach($contacts as $contact)
-        <div class="activity-item">
-            <div class="activity-icon">
-                <i class="fas fa-user"></i>
+        <div class="d-flex align-items-start justify-content-between border-bottom py-3"
+            id="contact-{{ $contact->id }}">
+            <div class="d-flex align-items-start gap-3">
+                <div class="text-primary fs-4">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <h6 class="mb-1">{{ $contact->full_name }}</h6>
+                    <p class="mb-1 text-muted small">{{ $contact->email }}</p>
+                    <p class="mb-0">{{ $contact->message }}</p>
+                </div>
             </div>
-            <div class="activity-details">
-                <div class="activity-title">{{$contact->full_name}}</div>
-                <div class="activity-title">{{$contact->email}}</div>
-                <div class="activity-time">{{$contact->message}}</div>
-            </div>
+
+            <button type="button" class="btn btn-sm btn-danger delete-contact ms-3" data-id="{{ $contact->id }}">
+                <i class="fas fa-trash-alt"></i>
+            </button>
         </div>
         @endforeach
         @else
-        <p>No job openings available.</p>
+        <div class="border p-3 text-center text-muted">No message available.</div>
         @endif
+
     </div>
 </div>
 @endsection
 @section('scripts')
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.delete-contact').forEach(button => {
+        button.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            const confirmed = confirm('Are you sure you want to delete this message?');
+
+            if (!confirmed) return;
+
+            fetch(`/admin/contacts/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload(); 
+                } else {
+                    return response.json().then(data => {
+                        alert(data.message || 'Failed to delete the message.');
+                    });
+                }
+            })
+            .catch(error => {
+                alert('An error occurred. Please try again.');
+                console.error(error);
+            });
+        });
+    });
+});
+</script>
+
 <script>
 // Toggle sidebar on mobile
 document.querySelector('.menu-toggle').addEventListener('click', function() {

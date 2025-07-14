@@ -302,9 +302,13 @@ body {
     text-overflow: ellipsis;
 }
 
-.activity-time {
-    font-size: 11px;
+.activity-email {
+    font-size: 15px;
     color: var(--gray);
+}
+.activity-time {
+    font-size: 15px;
+    color: var(--primary);
 }
 
 /* Responsive Adjustments */
