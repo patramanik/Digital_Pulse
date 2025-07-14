@@ -2,73 +2,94 @@
 @section('title', 'Digital Pulse-services')
 @section('content')
     <!-- Content -->
-    <div class="content">
+    <div class="content container mt-4">
         <!-- Services Form -->
-        <div class="card" style="max-width: 500px; margin-bottom: 30px;">
-        <div class="card-header">
-            <div class="card-title">Add Service</div>
-        </div>
-        <div class="card-body">
-            <form action="#" method="POST">
-            @csrf
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label for="title">Title</label>
-                <input type="text" name="title" id="title" class="form-control" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
+        <div class="card mx-auto" style="max-width: 500px; margin-bottom: 30px;">
+            <div class="card-header">
+                <div class="card-title h4 mb-0">Add Service</div>
             </div>
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label for="description">Description</label>
-                <textarea name="description" id="description" class="form-control" required rows="3" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;"></textarea>
+            <div class="card-body">
+                <form id="serviceForm" action="{{ route('admin.services.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" name="service_title" id="title" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea name="service_desc" id="description" class="form-control" required rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <div id="serviceFormMsg" class="mt-2"></div>
             </div>
-            <button type="submit" class="btn btn-primary" style="padding: 8px 20px; border-radius: 4px;">Submit</button>
-            </form>
-        </div>
-        </div>
-        <!-- Existing dashboard content below -->
-        <!-- Stats Cards -->
-        <div class="card-grid">
-        <!-- ... existing cards ... -->
-        </div>
-        <!-- Chart Section -->
-        <div class="chart-container">
-        <!-- ... existing chart ... -->
-        </div>
-        <!-- Recent Activity -->
-        <div class="activity-list">
-        <!-- ... existing activity ... -->
         </div>
     </div>
 @endsection
 @section('scripts')
- <script>
-    // Toggle sidebar on mobile
-    document.querySelector('.menu-toggle').addEventListener('click', function() {
-        document.querySelector('.sidebar').classList.toggle('active');
-        document.querySelector('.sidebar-overlay').classList.toggle('active');
-    });
+    <!-- Bootstrap JS (via CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
 
-    // Close sidebar when clicking on overlay
-    document.querySelector('.sidebar-overlay').addEventListener('click', function() {
-        document.querySelector('.sidebar').classList.remove('active');
-        this.classList.remove('active');
-    });
+        document.getElementById('serviceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const url = form.action;
+            const formData = new FormData(form);
 
-    // Close sidebar when clicking on menu item (mobile)
-    const menuItems = document.querySelectorAll('.menu-item');
-    menuItems.forEach(item => {
-        item.addEventListener('click', function() {
-        if (window.innerWidth < 768) {
-            document.querySelector('.sidebar').classList.remove('active');
-            document.querySelector('.sidebar-overlay').classList.remove('active');
-        }
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': form.querySelector('input[name="_token"]').value,
+                    'Accept': 'application/json'
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                let msgDiv = document.getElementById('serviceFormMsg');
+                if (data.success) {
+                    msgDiv.innerHTML = '<div class="alert alert-success">Service added successfully!</div>';
+                    form.reset();
+                } else {
+                    msgDiv.innerHTML = '<div class="alert alert-danger">' + (data.message || 'Error adding service.') + '</div>';
+                }
+            })
+            .catch(error => {
+                document.getElementById('serviceFormMsg').innerHTML = '<div class="alert alert-danger">An error occurred.</div>';
+            });
         });
-    });
 
-    // Adjust layout on window resize
-    window.addEventListener('resize', function() {
-        if (window.innerWidth >= 768) {
-        document.querySelector('.sidebar').classList.remove('active');
-        document.querySelector('.sidebar-overlay').classList.remove('active');
-        }
-    });
+        // Toggle sidebar on mobile
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+            document.querySelector('.sidebar-overlay').classList.toggle('active');
+        });
+
+        // Close sidebar when clicking on overlay
+        document.querySelector('.sidebar-overlay').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.remove('active');
+            this.classList.remove('active');
+        });
+
+        // Close sidebar when clicking on menu item (mobile)
+        const menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                if (window.innerWidth < 768) {
+                    document.querySelector('.sidebar').classList.remove('active');
+                    document.querySelector('.sidebar-overlay').classList.remove('active');
+                }
+            });
+        });
+
+        // Adjust layout on window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) {
+                document.querySelector('.sidebar').classList.remove('active');
+                document.querySelector('.sidebar-overlay').classList.remove('active');
+            }
+        });
     </script>
 @endsection
+

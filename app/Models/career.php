@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class career extends Model
 {
-use HasFactory;
+    use HasFactory;
 
     protected $fillable = [
         'career_title',

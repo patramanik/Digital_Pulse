@@ -10,8 +10,8 @@ class CareerController extends Controller
     // Show all careers
     public function index()
     {
-        $careers = Career::all();
-        return view('admin.careers.index', compact('careers'));
+
+        return view('admin.careers.careers');
     }
 
     // Show form to add new career
@@ -23,15 +23,27 @@ class CareerController extends Controller
     // Store new career
     public function store(Request $request)
     {
-        $validated = $request->validate([
+         $validated = $request->validate([
             'career_title' => 'required|string|max:255',
             'career_desc' => 'required|string|max:1000',
         ]);
 
-        career::create($validated);
 
-        return redirect()->route('admin.careers.list')
-                         ->with('success', 'Career added successfully.');
+
+        // if ($validated->fails()) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'errors' => $validated->errors()
+        //     ], 422);
+        // }
+
+        $career = career::create($validated);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Career added successfully!',
+            'career' => $career
+        ],201);
     }
 
     // Show form to edit existing career

@@ -21,7 +21,12 @@ class ServicesController extends Controller
         ]);
 
         $service = services::create($validated);
-        return response()->json($service, 201);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Service added successfully!',
+            'service' => $service
+        ], 201);
     }
 
     public function show($id)

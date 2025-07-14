@@ -4,8 +4,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
-            <i class="fas fa-cube fa-2x"></i>
-            <h2>Nexus</h2>
+            <h3>DIGITAL PULSE</h3>
         </div>
 
         <div class="sidebar-menu">
