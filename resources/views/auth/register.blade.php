@@ -10,7 +10,7 @@
 
         .login-header {
             font-size: 2rem;
-            background: linear-gradient(90deg, #28a745, #0d6efd);
+            background: black;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: bold;
@@ -94,7 +94,7 @@
 
                         {{-- Submit --}}
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-gradient btn-lg">
+                            <button type="submit" class="btn btn-dark btn-lg">
                                 {{ __('Sign Up') }}
                             </button>
                         </div>
