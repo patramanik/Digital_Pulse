@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\work;
+use App\Models\career;
+use App\Models\services;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -33,17 +36,21 @@ class HomeController extends Controller
 
     public function services()
     {
-        return view('landing.services');
+        $services = services::all();
+
+        return view('landing.services', compact('services'));
     }
 
     public function ourwork()
     {
-        return view('landing.our-work');
+        $works = work::all();
+        return view('landing.our-work',compact('works'));
     }
 
     public function career()
     {
-        return view('landing.career');
+        $careers = career::all();
+        return view('landing.career',compact('careers'));
     }
 
 

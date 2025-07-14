@@ -6,11 +6,34 @@
             <h1>Join Our Team</h1>
             <p class="career-subtitle">Post and manage job openings anytime.</p>
 
-            <form id="jobForm" class="career-form">
+            <!-- <form id="jobForm" class="career-form">
                 <input type="text" id="jobTitle" placeholder="Job Title" required />
                 <textarea id="jobDesc" rows="3" placeholder="Job Description" required></textarea>
                 <button type="submit" class="cta-btn">Post Job</button>
-            </form>
+            </form> -->
+            <div class="influencer-cards">
+
+             @if(isset($careers) && count($careers))
+                @foreach($careers as $career)
+
+                <div class="influencer-card">
+                    <h3>{{ $career->career_title }}</h3>
+                    <p>{{ $career->career_desc}}</p>
+                </div>
+                @endforeach
+            @else
+                <p>No job openings available.</p>
+            @endif
+
+                <!-- <div class="influencer-card">
+                    <h3>Campaign Management</h3>
+                    <p>From influencer discovery to publishing to reporting — we manage everything with precision.</p>
+                </div>
+                <div class="influencer-card">
+                    <h3>Authenticity & ROI</h3>
+                    <p>We focus on organic reach, trust-building, and ROI-focused partnerships that convert.</p>
+                </div> -->
+            </div>
 
             <div id="jobCards" class="career-cards"></div>
         </div>

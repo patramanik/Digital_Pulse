@@ -6,13 +6,32 @@
             <h1>Our Work</h1>
             <p class="work-subtitle">Discover our latest projects and case studies.</p>
 
-            <form id="workForm" class="work-form">
-                <input type="text" id="projectTitle" placeholder="Project Title" required />
-                <textarea id="projectDesc" rows="3" placeholder="Project Description" required></textarea>
-                <button type="submit" class="cta-btn">Add Project</button>
-            </form>
+            <div class="influencer-cards">
 
-            <div id="workCards" class="work-cards"></div>
+                @if(isset($works) && count($works))
+                    @foreach($works as $work)
+
+                    <div class="influencer-card">
+                        <h3>{{ $work->work_desc }}</h3>
+                        <p>{{ $work->work_desc}}</p>
+                    </div>
+                    @endforeach
+                @else
+                    <p>No services available.</p>
+                @endif
+
+                <!-- <div class="influencer-card">
+                    <h3>Campaign Management</h3>
+                    <p>From influencer discovery to publishing to reporting — we manage everything with precision.</p>
+                </div>
+                <div class="influencer-card">
+                    <h3>Authenticity & ROI</h3>
+                    <p>We focus on organic reach, trust-building, and ROI-focused partnerships that convert.</p>
+                </div> -->
+            </div>
+
+            <!-- <a href="" class="cta-btn">Partner With Us</a> -->
+            <!-- <div id="workCards" class="work-cards"></div> -->
         </div>
     </section>
 @endsection

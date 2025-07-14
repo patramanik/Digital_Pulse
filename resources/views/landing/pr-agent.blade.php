@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <a href="contact.html" class="cta-btn">Talk to Our PR Expert</a>
+            <a href="/contact" class="cta-btn">Talk to Our PR Expert</a>
         </div>
     </section>
 @endsection

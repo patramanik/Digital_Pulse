@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <a href="contact.html" class="cta-btn">Get SEO Audit</a>
+            <a href="/contact" class="cta-btn">Get SEO Audit</a>
         </div>
     </section>
 @endsection

@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WorkController;
+use App\Http\Controllers\CareerController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\AdminDashbordController;
-use App\Http\Controllers\CareerController;
 use App\Http\Controllers\ServicesController;
-use App\Http\Controllers\WorkController;
+use App\Http\Controllers\ContactusController;
+use App\Http\Controllers\Admin\AdminDashbordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,7 @@ Route::controller(HomeController::class)->group(function (){
 
 Route::controller(WorkController::class)->prefix('admin')->middleware('auth')->group(function () {
     // Show all works
-    Route::get('/works', 'index')->name('admin.works.list');
+    Route::get('/works', 'index')->name('admin.works.works');
 
     // Show form to create a new work
     Route::get('/add-work', 'create')->name('admin.works.add');
@@ -107,12 +108,28 @@ Route::controller(CareerController::class)->prefix('admin')->middleware('auth')-
 });
 
 
+Route::post('/contacts', [ContactusController::class,'store'])->name('landing.contacts.store');
+
+Route::controller(ContactusController::class)->prefix('admin')->middleware('auth')->group(function () {
+    // List all contact us entries
+    Route::get('/contacts', 'index')->name('admin.contacts.list');
+
+    // Store a new contact us entry
+    Route::post('/contacts', 'store')->name('admin.contacts.store');
+
+    // Show a specific contact us entry
+    Route::get('/contacts/{id}', 'show')->name('admin.contacts.show');
+
+    // Update a contact us entry
+    Route::put('/contacts/{id}', 'update')->name('admin.contacts.update');
+
+    // Delete a contact us entry
+    Route::delete('/contacts/{id}', 'destroy')->name('admin.contacts.delete');
+});
 
 
 
 
-Route::post('/delete-commend/{id}', [AdminDashbordController::class, 'deletCommend'])
-->middleware('auth')->name('deletecommend');
 
 // Admin Routes
 Route::get('admin', [AdminDashbordController::class, 'index'])

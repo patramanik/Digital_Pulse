@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <a href="contact.html" class="cta-btn">Schedule Free Strategy Call</a>
+            <a href="/contact" class="cta-btn">Schedule Free Strategy Call</a>
         </div>
     </section>
 @endsection

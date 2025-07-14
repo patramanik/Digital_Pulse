@@ -18,14 +18,13 @@
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: "Segoe UI", sans-serif;
     background-color: var(--color-white);
     color: var(--color-white);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
-
 
 /* Sticky Navigation */
 .navbar {
@@ -105,10 +104,10 @@ body {
         left: 0;
         right: 0;
         flex-direction: column;
-    background-color: var(--color-black);
+        background-color: var(--color-black);
         display: none;
         text-align: center;
-        border-top: 1px solid #222;
+        border-top: 1px solid var(--color-card-gray);
     }
 
     .nav-links.show {
@@ -175,7 +174,6 @@ body {
     bottom: 0;
 }
 
-
 /* Responsive */
 @media (max-width: 768px) {
     .nav-links {
@@ -205,16 +203,21 @@ body {
     background-color: var(--color-black);
     color: var(--color-white);
     min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .contact-container {
     max-width: 600px;
+    width: 100%;
     margin: auto;
 }
 
 .contact-container h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    color: var(--color-white);
 }
 
 .contact-container p {
@@ -231,23 +234,70 @@ body {
 
 .contact-form input,
 .contact-form textarea {
-    padding: 0.75rem;
-    border: 1px solid var(--color-white);
-    background: var(--color-black);
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-mid-gray);
+    background-color: var(--color-black);
     color: var(--color-white);
     font-size: 1rem;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: var(--color-gray);
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
-    border-color: #333;
+    border-color: var(--color-white);
+    background-color: var(--color-black);
+}
+
+.cta-btn {
+    padding: 0.75rem 1rem;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 4px;
+}
+
+.cta-btn:hover {
+    background-color: var(--color-mid-gray);
+    color: var(--color-white);
 }
 
 .response-text {
     margin-top: 1rem;
-    color: green;
     font-weight: bold;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+/* Optional success/error styles via JS */
+.response-text.success {
+    color: limegreen;
+}
+
+.response-text.error {
+    color: red;
+}
+
+/* Mobile responsive tweaks */
+@media (max-width: 600px) {
+    .contact-container h1 {
+        font-size: 2rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 0.95rem;
+    }
 }
 
 /* SEO Service Page */
@@ -400,7 +450,6 @@ body {
     margin-bottom: 0.75rem;
     font-size: 1.3rem;
 }
-
 
 /* Our Work Page */
 .work-section {
@@ -578,7 +627,6 @@ body {
     }
 }
 
-
 /* Our Services Page */
 .service-section {
     background-color: var(--color-black);
@@ -586,6 +634,11 @@ body {
     padding: 4rem 2rem;
     min-height: 85vh;
     text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 }
 
 .service-container {
@@ -648,8 +701,8 @@ body {
 
 /* Career Page */
 .career-section {
-    background-color: #fff;
-    color: #000;
+    background-color: var(--color-black);
+    color: var(--color-white);
     padding: 4rem 2rem;
     min-height: 80vh;
     text-align: center;
@@ -662,7 +715,7 @@ body {
 
 .career-subtitle {
     font-size: 1rem;
-    color: #555;
+    color: var(--color-gray);
     margin-bottom: 2rem;
 }
 
@@ -676,14 +729,14 @@ body {
 .career-form input,
 .career-form textarea {
     padding: 0.75rem;
-    border: 1px solid #000;
+    border: 1px solid var(--color-white);
     font-size: 1rem;
 }
 
 .career-form input:focus,
 .career-form textarea:focus {
     outline: none;
-    border-color: #222;
+    border-color: var(--color-white);
 }
 
 .career-cards {
@@ -694,8 +747,8 @@ body {
 
 .career-card {
     padding: 1rem;
-    border: 1px solid #000;
-    background-color: #f9f9f9;
+    border: 1px solid var(--color-black);
+    background-color: var(--color-white);
     text-align: left;
     position: relative;
 }
@@ -713,11 +766,11 @@ body {
 
 /* Influencer Marketing Page */
 .influencer-section {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--color-black);
+    color: var(--color-white);
     padding: 4rem 2rem;
     text-align: center;
-    min-height: 80vh;
+    min-height: 85vh;
 }
 
 .influencer-container {
@@ -732,29 +785,29 @@ body {
 
 .influencer-subtitle {
     font-size: 1.1rem;
-    color: #ccc;
+    color: var(--color-gray);
     margin-bottom: 3rem;
 }
 
 .influencer-cards {
-    background-color: var(--color-card-gray);
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 2rem;
     margin-bottom: 2.5rem;
 }
 
 .influencer-card {
-    border: 1px solid #fff;
+    border: 1px solid var(--color-white);
     padding: 1.5rem;
-    background-color: #111;
-    transition: background 0.3s ease, color 0.3s ease;
+    background-color: var(--color-black);
+    transition: transform 0.3s ease;
 }
 
 .influencer-card:hover {
-    background-color: #fff;
-    color: #000;
+    transform: translateY(-5px);
+    background-color: var(--color-white);
+    color: var(--color-black);
 }
-
 
 html {
     scroll-behavior: smooth;
@@ -764,7 +817,6 @@ html {
 .main-content {
     flex: 1 0 auto;
 }
-
 
 /* Responsive Enhancements */
 @media (max-width: 1024px) {
@@ -887,4 +939,3 @@ html {
         gap: 0.3rem;
     }
 }
-

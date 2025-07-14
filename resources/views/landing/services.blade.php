@@ -1,18 +1,35 @@
 @extends('layouts.landing')
 @section('title', 'Our Services – Digital Pulse')
 @section('content')
-        <section class="service-section">
+    <section class="service-section">
         <div class="service-container">
             <h1>Our Services</h1>
             <p class="service-subtitle">Add and manage the services we offer, instantly.</p>
 
-            <form id="serviceForm" class="service-form">
-                <input type="text" id="serviceTitle" placeholder="Service Title" required />
-                <textarea id="serviceDesc" rows="3" placeholder="Service Description" required></textarea>
-                <button type="submit" class="cta-btn">Add Service</button>
-            </form>
+            <div class="influencer-cards">
 
-            <div id="serviceCards" class="service-cards"></div>
+             @if(isset($services) && count($services))
+                @foreach($services as $service)
+
+                <div class="influencer-card">
+                    <h3>{{ $service->service_title }}</h3>
+                    <p>{{ $service->service_desc}}</p>
+                </div>
+                @endforeach
+            @else
+                <p>No services available.</p>
+            @endif
+
+                <!-- <div class="influencer-card">
+                    <h3>Campaign Management</h3>
+                    <p>From influencer discovery to publishing to reporting — we manage everything with precision.</p>
+                </div>
+                <div class="influencer-card">
+                    <h3>Authenticity & ROI</h3>
+                    <p>We focus on organic reach, trust-building, and ROI-focused partnerships that convert.</p>
+                </div> -->
+            </div>
+            <a href="/contact" class="cta-btn">Contact With Us</a>
         </div>
     </section>
 @endsection

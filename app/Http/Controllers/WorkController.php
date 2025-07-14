@@ -9,8 +9,7 @@ class WorkController extends Controller
 {
     public function index()
     {
-        $works = work::all();
-        return response()->json($works);
+        return view('admin.works.works');
     }
 
     public function store(Request $request)
@@ -20,8 +19,19 @@ class WorkController extends Controller
             'work_desc' => 'required|string',
         ]);
 
-        $work = work::create($validated);
-        return response()->json($work, 201);
+        try {
+            $work = work::create($validated);
+            return response()->json([
+                'success' => true,
+                'work' => $work,
+                'message' => 'Work added successfully!'
+            ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error occurred'
+            ], 500);
+        }
     }
 
     public function show($id)

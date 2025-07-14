@@ -12,7 +12,6 @@ class ServicesController extends Controller
         // $services = services::all();
         return view('admin.services.services');
     }
-
     public function store(Request $request)
     {
         $validated = $request->validate([

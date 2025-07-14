@@ -21,8 +21,7 @@
                     <p>We focus on organic reach, trust-building, and ROI-focused partnerships that convert.</p>
                 </div>
             </div>
-
-            <a href="contact.html" class="cta-btn">Partner With Us</a>
+            <a href="/contact" class="cta-btn">Partner With Us</a>
         </div>
     </section>
 @endsection
