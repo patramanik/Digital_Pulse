@@ -17,6 +17,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    /* text-decoration: none; */
 }
 
 body {
@@ -53,46 +54,41 @@ body {
     transition: opacity 0.3s;
 }
 
-.sidebar-menu {
-    padding: 20px 0;
-    overflow-y: auto;
-    max-height: calc(100vh - 80px);
+.sidebar-menu a {
+    text-decoration: none;         /* Remove underline */
+    color: inherit;                /* Inherit color from parent */
+    display: block;                /* Ensure full clickable area */
 }
 
 .menu-item {
-    padding: 12px 20px;
     display: flex;
     align-items: center;
-    cursor: pointer;
-    transition: all 0.3s;
-    position: relative;
-    white-space: nowrap;
-}
-
-.menu-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.menu-item.active {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.menu-item.active::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 4px;
-    background-color: var(--secondary);
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: #fff;                   /* Set text color */
+    transition: background 0.3s ease;
+    font-weight: 500;
 }
 
 .menu-item i {
-    margin-right: 10px;
-    font-size: 18px;
-    min-width: 24px;
+    font-size: 1rem;
+    color: #fff;
 }
 
+.menu-item:hover {
+    background-color: #222;        /* Hover background */
+    color: #fff;
+}
+
+.menu-item.active {
+    background-color: #333;
+    border-left: 4px solid #00c292; /* Highlight active */
+    color: #00c292;
+}
+
+.menu-item.active i {
+    color: #00c292;
+}
 /* Main Content Styles */
 .main-content {
     flex: 1;
