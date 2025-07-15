@@ -52,51 +52,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- <div class="card">
-            <div class="card-header">
-                <div>
-                    <div class="card-title">New Users</div>
-                    <div class="card-value">1,254</div>
-                    <div class="card-change positive">
-                        <i class="fas fa-arrow-up"></i> 8.3% from last month
-                    </div>
-                </div>
-                <div class="card-icon success">
-                    <i class="fas fa-user-plus"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div>
-                    <div class="card-title">Pending Orders</div>
-                    <div class="card-value">86</div>
-                    <div class="card-change negative">
-                        <i class="fas fa-arrow-down"></i> 3.2% from last month
-                    </div>
-                </div>
-                <div class="card-icon warning">
-                    <i class="fas fa-shopping-bag"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div>
-                    <div class="card-title">Support Tickets</div>
-                    <div class="card-value">32</div>
-                    <div class="card-change positive">
-                        <i class="fas fa-arrow-up"></i> 5.7% from last month
-                    </div>
-                </div>
-                <div class="card-icon danger">
-                    <i class="fas fa-ticket-alt"></i>
-                </div>
-            </div>
-        </div> -->
     </div>
 
 
@@ -161,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(response => {
                 if (response.ok) {
-                    location.reload(); 
+                    location.reload();
                 } else {
                     return response.json().then(data => {
                         alert(data.message || 'Failed to delete the message.');

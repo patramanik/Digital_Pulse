@@ -64,6 +64,8 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
         submitButton.disabled = false; // Re-enable the button
     });
 });
+
+
 </script>
 @endsection
 
