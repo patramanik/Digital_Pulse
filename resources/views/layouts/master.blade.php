@@ -23,38 +23,113 @@
     </div>
     @yield('scripts')
 
-    <script>
-    // Toggle sidebar on mobile
-    document.querySelector('.menu-toggle').addEventListener('click', function() {
-        document.querySelector('.sidebar').classList.toggle('active');
-        document.querySelector('.sidebar-overlay').classList.toggle('active');
-    });
+    <!-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+        const toggleButton = document.querySelector('.menu-toggle');
+        const menuItems = document.querySelectorAll('.menu-item');
 
-    // Close sidebar when clicking on overlay
-    document.querySelector('.sidebar-overlay').addEventListener('click', function() {
-        document.querySelector('.sidebar').classList.remove('active');
-        this.classList.remove('active');
-    });
+        // Toggle sidebar on mobile
+        toggleButton?.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
 
-    // Close sidebar when clicking on menu item (mobile)
-    const menuItems = document.querySelectorAll('.menu-item');
-    menuItems.forEach(item => {
-        item.addEventListener('click', function() {
-            if (window.innerWidth < 768) {
-                document.querySelector('.sidebar').classList.remove('active');
-                document.querySelector('.sidebar-overlay').classList.remove('active');
+        // Close sidebar when clicking overlay
+        overlay?.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Close sidebar on mobile after menu click & set active state
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove active class from all
+                menuItems.forEach(i => i.classList.remove('active'));
+
+                // Add active class to clicked
+                this.classList.add('active');
+
+                // Close sidebar on small screens
+                if (window.innerWidth < 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                }
+            });
+        });
+
+        // Set active item based on current path
+        const currentPath = window.location.pathname;
+        menuItems.forEach(item => {
+            if (currentPath.startsWith(item.getAttribute('data-path'))) {
+                item.classList.add('active');
+            }
+        });
+
+        // Auto close sidebar if window resized up
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
             }
         });
     });
+    </script> -->
 
-    // Adjust layout on window resize
-    window.addEventListener('resize', function() {
-        if (window.innerWidth >= 768) {
-            document.querySelector('.sidebar').classList.remove('active');
-            document.querySelector('.sidebar-overlay').classList.remove('active');
-        }
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+        const toggleButton = document.querySelector('.menu-toggle');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        // Toggle sidebar on mobile
+        toggleButton?.addEventListener('click', function () {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        // Close sidebar when clicking overlay
+        overlay?.addEventListener('click', function () {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Highlight current active menu
+        const currentPath = window.location.pathname;
+
+        menuLinks.forEach(link => {
+            const dataPath = link.getAttribute('data-path');
+            const menuItem = link.querySelector('.menu-item');
+
+            // Exact match
+            if (dataPath === currentPath) {
+                menuItem.classList.add('active');
+            } else {
+                menuItem.classList.remove('active');
+            }
+
+            // Close sidebar on mobile after click
+            link.addEventListener('click', function () {
+                if (window.innerWidth < 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                }
+            });
+        });
+
+        // Auto-close on resize
+        window.addEventListener('resize', function () {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        });
     });
-    </script>
+</script>
+
+
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>

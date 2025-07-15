@@ -13,7 +13,7 @@
 
     <header class="py-3 bg-dark">
         <div class="container">
-            <a class="navbar-brand ps-3 text-white"  href="{{ url('/admin') }}">
+            <a class="navbar-brand ps-3 h4 text-white"  href="{{ url('/admin') }}">
                 <i class="fas fa-arrow-left me-2"></i>
             DIGITAL PULSE
             </a>

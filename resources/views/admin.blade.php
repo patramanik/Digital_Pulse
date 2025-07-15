@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-header">
                 <div>
-                    <div class="card-title">Contact Messages</div>
+                    <div class="card-title h6">Contact Messages</div>
                     <div class="card-value">{{ $contact_count }}</div>
                 </div>
                 <div class="card-icon primary">
@@ -20,7 +20,7 @@
         <div class="card">
             <div class="card-header">
                 <div>
-                    <div class="card-title">Works</div>
+                    <div class="card-title h6">Works</div>
                     <div class="card-value">{{ $work_count }}</div>
                 </div>
                 <div class="card-icon success">
@@ -32,7 +32,7 @@
         <div class="card">
             <div class="card-header">
                 <div>
-                    <div class="card-title">Careers</div>
+                    <div class="card-title h6">Careers</div>
                     <div class="card-value">{{ $careers_count }}</div>
                 </div>
                 <div class="card-icon warning">
@@ -44,7 +44,7 @@
         <div class="card">
             <div class="card-header">
                 <div>
-                    <div class="card-title">Services</div>
+                    <div class="card-title h6">Services</div>
                     <div class="card-value">{{ $services_count }}</div>
                 </div>
                 <div class="card-icon danger">
@@ -58,17 +58,6 @@
     <!-- Recent Activity -->
     <div class="activity-list">
         <h3 style="margin-bottom: 15px; font-size: 16px;">Recent Message</h3>
-
-        <!-- <div class="activity-item">
-            <div class="activity-icon">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="activity-details">
-                <div class="activity-title">New user registered: John Doe with email john@example.com</div>
-                <div class="activity-time">15 minutes ago</div>
-            </div>
-        </div> -->
-
         @if(isset($contacts) && count($contacts))
         @foreach($contacts as $contact)
         <div class="d-flex align-items-start justify-content-between border-bottom py-3"
@@ -132,36 +121,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<script>
-// Toggle sidebar on mobile
-document.querySelector('.menu-toggle').addEventListener('click', function() {
-    document.querySelector('.sidebar').classList.toggle('active');
-    document.querySelector('.sidebar-overlay').classList.toggle('active');
-});
-
-// Close sidebar when clicking on overlay
-document.querySelector('.sidebar-overlay').addEventListener('click', function() {
-    document.querySelector('.sidebar').classList.remove('active');
-    this.classList.remove('active');
-});
-
-// Close sidebar when clicking on menu item (mobile)
-const menuItems = document.querySelectorAll('.menu-item');
-menuItems.forEach(item => {
-    item.addEventListener('click', function() {
-        if (window.innerWidth < 768) {
-            document.querySelector('.sidebar').classList.remove('active');
-            document.querySelector('.sidebar-overlay').classList.remove('active');
-        }
-    });
-});
-
-// Adjust layout on window resize
-window.addEventListener('resize', function() {
-    if (window.innerWidth >= 768) {
-        document.querySelector('.sidebar').classList.remove('active');
-        document.querySelector('.sidebar-overlay').classList.remove('active');
-    }
-});
-</script>
 @endsection
