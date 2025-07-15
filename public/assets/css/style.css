@@ -230,7 +230,7 @@ body {
 .contact-container p {
     margin-bottom: 2rem;
     font-size: 1rem;
-    color: var(--color-mid-gray);
+    color: var(--color-gray);
 }
 
 .contact-form {

@@ -9,7 +9,8 @@ class WorkController extends Controller
 {
     public function index()
     {
-        return view('admin.works.works');
+        $works = work::all();
+        return view('admin.works.works',compact("works"));
     }
 
     public function store(Request $request)

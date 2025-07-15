@@ -61,16 +61,6 @@
                 <span>Contact</span>
             </div>
         </a>
-
-         <div class="menu-item">
-             <form action="{{ route('logout') }}" method="POST">
-                 @csrf
-                 <button type="submit" style="all: unset; cursor: pointer;">
-                     <i class="fas fa-sign-out-alt"></i>
-                     <span>Logout</span>
-                 </button>
-             </form>
-         </div>
      </div>
  </div>
  </div>

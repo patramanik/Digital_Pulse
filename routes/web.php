@@ -26,7 +26,6 @@ Route::get('/admin', function () {
 });
 
 
-
 Route::get('/', [HomeController::class, 'index']);
 Route::controller(HomeController::class)->group(function (){
     Route::get('/', 'index');
@@ -57,7 +56,7 @@ Route::controller(WorkController::class)->prefix('admin')->middleware('auth')->g
     Route::post('/works/add', 'store')->name('admin.works.store');
 
     // Show form to edit an existing work
-    Route::get('/edit-work/{id}', 'edit')->name('admin.works.edit');
+    Route::get('/edit-work/{id}', 'show')->name('admin.works.edit');
 
     // Update an existing work
     Route::put('/update-work/{id}', 'update')->name('admin.works.update');
@@ -77,7 +76,7 @@ Route::controller(ServicesController::class)->prefix('admin')->middleware('auth'
     Route::post('/services/add', 'store')->name('admin.services.store');
 
     // Show form to edit an existing service
-    Route::get('/edit-service/{id}', 'edit')->name('admin.services.edit');
+    Route::get('/edit-service/{id}', 'show')->name('admin.services.edit');
 
     // Update an existing service
     Route::put('/update-service/{id}', 'update')->name('admin.services.update');
@@ -126,8 +125,6 @@ Route::controller(ContactusController::class)->prefix('admin')->middleware('auth
     // Delete a contact us entry
     Route::delete('/contacts/{id}', 'destroy')->name('admin.contacts.delete');
 });
-
-
 
 
 

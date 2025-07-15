@@ -5,7 +5,7 @@
         <div class="hero-content">
             <h1>We Drive Digital Growth</h1>
             <p>Welcome to Digital Pulse – your partner for online dominance and brand authority.</p>
-            <a href="services.html" class="cta-btn">Explore Services</a>
+            <a href="/services" class="cta-btn">Explore Services</a>
         </div>
     </section>
 @endsection
