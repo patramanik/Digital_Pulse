@@ -185,36 +185,6 @@ $(document).ready(function() {
             }
         });
     });
-
-    // // UPDATE Career
-    // $('#editCareerForm').on('submit', function(e) {
-    //     e.preventDefault();
-    //     let form = $(this);
-    //     let formData = form.serialize();
-
-    //     $.ajax({
-    //         url: form.attr('action'), // safer
-    //         type: "POST",
-    //         data: formData,
-    //         success: function(data) {
-    //             if (data.success) {
-    //                 Swal.fire('Updated!', 'Career updated successfully.', 'success')
-    //                     .then(() => location.reload());
-    //             } else if (data.errors) {
-    //                 let errorText = Object.values(data.errors).join("<br>");
-    //                 $('#editCareerFormMsg').html(
-    //                     `<div class="alert alert-danger">${errorText}</div>`);
-    //             } else {
-    //                 Swal.fire('Error', 'Something went wrong.', 'error');
-    //             }
-    //         },
-    //         error: function(xhr, status, error) {
-    //             console.log("AJAX Error:", xhr.responseText);
-    //             Swal.fire('Error', 'Server error. Try again later.', 'error');
-    //         }
-    //     });
-    // });
-
     // DELETE Career
     $('.delete-career').on('click', function() {
         var careerId = $(this).data('id');
@@ -286,7 +256,7 @@ $(document).ready(function() {
         },
         submitHandler: function(form) {
             let formData = new FormData(form);
-            var careerId = $(this).data('id');
+            let careerId = $('#editCareerId').val();
             $.ajax({
                 type: 'POST',
                 url: '/admin/update-career/'+careerId,
