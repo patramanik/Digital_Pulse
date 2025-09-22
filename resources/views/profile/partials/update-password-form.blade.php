@@ -11,7 +11,7 @@
                     </p>
                 </header>
 
-                <form method="post" action="{{ route('password.update') }}" class="mt-4">
+                <form method="post" action="#" class="mt-4">
                     @csrf
                     @method('put')
 
