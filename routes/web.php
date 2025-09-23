@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\Admin\AdminDashbordController;
+use App\Http\Controllers\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,6 +126,12 @@ Route::controller(ContactusController::class)->prefix('admin')->middleware('auth
 
     // Delete a contact us entry
     Route::delete('/contacts/{id}', 'destroy')->name('admin.contacts.delete');
+});
+Route::controller(QuizController::class)->prefix('admin')->middleware('auth')->group(function () {
+    // List all contact us entries
+     Route::get('/quiz', 'QuizFormView')->name('quiz.formview');
+
+
 });
 
 
