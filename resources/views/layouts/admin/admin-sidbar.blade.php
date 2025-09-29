@@ -16,22 +16,30 @@
              <i class="fas fa-users"></i>
              <span>Users</span>
          </div>
+         <form action="{{ route('subjects.index') }}" method="GET">
+             <button type="submit" class="menu-item">
+                 <i class="fas fa-users"></i>
+                 <span>Subjects</span>
+             </button>
+         </form>
+
+
          <form action="{{ route('quiz.formview') }}" method="GET">
              <button type="submit" class="menu-item">
                  <i class="fas fa-users"></i>
                  <span>Quiz</span>
              </button>
          </form>
-
-
-         <div class="menu-item">
-             <i class="fas fa-box-open"></i>
-             <span>Products</span>
-         </div>
-         <div class="menu-item">
+         <form action="{{ route('class_subject.view') }}" method="GET">
+             <button type="submit" class="menu-item">
+                 <i class="fas fa-users"></i>
+                 <span>Class Subject Mapping</span>
+             </button>
+         </form>
+         {{-- <div class="menu-item">
              <i class="fas fa-shopping-cart"></i>
              <span>Orders</span>
-         </div>
+         </div> --}}
          <div class="menu-item">
              <i class="fas fa-chart-line"></i>
              <span>Analytics</span>

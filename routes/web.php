@@ -10,6 +10,7 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\Admin\AdminDashbordController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\SubjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,7 @@ Route::get('/admin', function () {
 
 
 Route::get('/', [HomeController::class, 'index']);
-Route::controller(HomeController::class)->group(function (){
+Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/about', 'about');
     Route::get('/services', 'services');
@@ -109,7 +110,7 @@ Route::controller(CareerController::class)->prefix('admin')->middleware('auth')-
 });
 
 
-Route::post('/contacts', [ContactusController::class,'store'])->name('landing.contacts.store');
+Route::post('/contacts', [ContactusController::class, 'store'])->name('landing.contacts.store');
 
 Route::controller(ContactusController::class)->prefix('admin')->middleware('auth')->group(function () {
     // List all contact us entries
@@ -129,9 +130,22 @@ Route::controller(ContactusController::class)->prefix('admin')->middleware('auth
 });
 Route::controller(QuizController::class)->prefix('admin')->middleware('auth')->group(function () {
     // List all contact us entries
-     Route::get('/quiz', 'QuizFormView')->name('quiz.formview');
+    Route::get('/quiz', 'QuizFormView')->name('quiz.formview');
+    Route::post('/quiz', 'QuizFormStore')->name('quiz.store');
+    Route::get('/allquiz', 'FetchallQuiz')->name('quiz.fetch');
+    // Route::get('/admin/get-subjects/{classId}', [QuizController::class, 'getSubjectsByClass'])->name('quiz.getSubjects');
+    Route::get('/get-subjects/{classId}', 'getSubjectsByClass')->name('quiz.getSubjects');
+    
 
-
+});
+Route::controller(SubjectController::class)->prefix('admin')->middleware('auth')->group(function () {
+    // List all contact us entries
+    Route::get('/subjects', [SubjectController::class, 'index'])->name('subjects.index');
+    //     Route::get('/subjects/create', [SubjectController::class, 'create'])->name('subjects.create');
+    Route::post('/subjects', [SubjectController::class, 'store'])->name('subjects.store');
+    Route::get('/class-subject', [SubjectController::class, 'ClassSubjView'])->name('class_subject.view');
+    Route::post('/class-subject', [SubjectController::class, 'ClassSubjStore'])->name('class_subject.store');
+    
 });
 
 
@@ -152,4 +166,3 @@ Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 
 require __DIR__ . '/auth.php';
-
