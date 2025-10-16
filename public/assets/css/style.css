@@ -18,13 +18,14 @@
 }
 
 body {
-    font-family: "Segoe UI", sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     background-color: var(--color-white);
     color: var(--color-white);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
+
 
 /* Sticky Navigation */
 .navbar {
@@ -63,27 +64,29 @@ body {
     color: var(--color-gray);
 }
 
-/* Hamburger Menu */
+/* Hamburger Menu - Default (hidden on large screens) */
 .menu-toggle {
     display: none;
     flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    width: 25px;
-    height: 20px;
     justify-content: center;
     align-items: center;
+    gap: 6px; /* This adds visible space between lines */
+    width: 30px;
+    height: auto; /* Ensure it fits content */
+    cursor: pointer;
+    z-index: 999;
 }
 
 .menu-toggle span {
     display: block;
     width: 100%;
     height: 3px;
-    background: var(--color-white);
+    background-color: var(--color-white);
+    border-radius: 2px;
     transition: all 0.3s ease;
 }
 
-/* Animate to X */
+/* When toggled to X */
 .menu-toggle.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
@@ -96,8 +99,16 @@ body {
     transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Responsive */
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+    }
+
     .nav-links {
         position: absolute;
         top: 100%;
@@ -108,16 +119,15 @@ body {
         display: none;
         text-align: center;
         border-top: 1px solid var(--color-card-gray);
+        padding: 1rem 0;
+        z-index: 998;
     }
 
     .nav-links.show {
         display: flex;
     }
-
-    .menu-toggle {
-        display: block;
-    }
 }
+
 
 /* Hero Section */
 .hero-section {
@@ -174,6 +184,7 @@ body {
     bottom: 0;
 }
 
+
 /* Responsive */
 @media (max-width: 768px) {
     .nav-links {
@@ -190,10 +201,6 @@ body {
     .nav-links.active {
         display: flex;
     }
-
-    .menu-toggle {
-        display: block;
-    }
 }
 
 /* Contact Page */
@@ -202,7 +209,7 @@ body {
     text-align: center;
     background-color: var(--color-black);
     color: var(--color-white);
-    min-height: 80vh;
+    min-height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -223,7 +230,7 @@ body {
 .contact-container p {
     margin-bottom: 2rem;
     font-size: 1rem;
-    color: var(--color-mid-gray);
+    color: var(--color-gray);
 }
 
 .contact-form {
@@ -451,6 +458,7 @@ body {
     font-size: 1.3rem;
 }
 
+
 /* Our Work Page */
 .work-section {
     background-color: var(--color-black);
@@ -627,6 +635,7 @@ body {
     }
 }
 
+
 /* Our Services Page */
 .service-section {
     background-color: var(--color-black);
@@ -635,8 +644,7 @@ body {
     min-height: 85vh;
     text-align: center;
 }
-
-h1 {
+h1{
     font-size: 2.5rem;
     margin-bottom: 1rem;
 }
@@ -818,6 +826,8 @@ html {
     flex: 1 0 auto;
 }
 
+
+
 /* Responsive Enhancements */
 @media (max-width: 1024px) {
     .hero-content h1,
@@ -939,3 +949,4 @@ html {
         gap: 0.3rem;
     }
 }
+

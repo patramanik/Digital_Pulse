@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Medical Learner') }}</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -26,12 +26,12 @@
     @yield('styles')
 </head>
 
-<body>
+<body class="bg-dark">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('public/assets/img/medicallearner_logo.png') }}" alt="Logo" width="135" height="40">
+                <a class="navbar-brand h4" href="{{ url('/') }}">
+                    DIGITAL PULSE
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -55,11 +55,11 @@
                                 </li>
                             @endif
 
-                            <!--@if (Route::has('register'))-->
-                            <!--    <li class="nav-item">-->
-                            <!--        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>-->
-                            <!--    </li>-->
-                            <!--@endif-->
+                            @if (Route::has('register'))
+                               <li class="nav-item">
+                                   <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                               </li>
+                            @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"

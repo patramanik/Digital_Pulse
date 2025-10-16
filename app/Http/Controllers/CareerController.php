@@ -10,32 +10,23 @@ class CareerController extends Controller
     // Show all careers
     public function index()
     {
-
-        return view('admin.careers.careers');
+        $careers = career::latest()->get();
+        return view('admin.careers.careers', compact('careers'));
     }
 
-    // Show form to add new career
+    // Show form to add new career (optional for non-modal)
     public function create()
     {
         return view('admin.careers.create');
     }
 
-    // Store new career
+    // Store new career via AJAX
     public function store(Request $request)
     {
-         $validated = $request->validate([
+        $validated = $request->validate([
             'career_title' => 'required|string|max:255',
             'career_desc' => 'required|string|max:1000',
         ]);
-
-
-
-        // if ($validated->fails()) {
-        //     return response()->json([
-        //         'success' => false,
-        //         'errors' => $validated->errors()
-        //     ], 422);
-        // }
 
         $career = career::create($validated);
 
@@ -43,38 +34,44 @@ class CareerController extends Controller
             'success' => true,
             'message' => 'Career added successfully!',
             'career' => $career
-        ],201);
+        ]);
     }
 
-    // Show form to edit existing career
+    // Return JSON data to edit modal
     public function edit($id)
     {
-        $career = career::findOrFail($id);
-        return view('admin.careers.edit', compact('career'));
+        $career = career::find($id);
+        if ($career) {
+            return response()->json(['success' => true, 'data' => $career]);
+        }
+        return response()->json(['success' => false, 'message' => 'Career not found.']);
     }
 
-    // Update existing career
+    // Update career via AJAX
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
+        $request->validate([
             'career_title' => 'required|string|max:255',
-            'career_desc' => 'required|string|max:1000',
+            'career_desc' => 'required|string'
         ]);
 
         $career = career::findOrFail($id);
-        $career->update($validated);
+        $career->career_title = $request->career_title;
+        $career->career_desc = $request->career_desc;
+        $career->save();
 
-        return redirect()->route('admin.careers.list')
-                         ->with('success', 'Career updated successfully.');
+        return response()->json(['success' => true]);
     }
 
     // Delete existing career
     public function destroy($id)
     {
-        $career = career::findOrFail($id);
-        $career->delete();
+        $career = career::find($id);
+        if ($career) {
+            $career->delete();
+            return response()->json(['success' => true, 'message' => 'Career deleted successfully!']);
+        }
 
-        return redirect()->route('admin.careers.list')
-                         ->with('success', 'Career deleted successfully.');
+        return response()->json(['success' => false, 'message' => 'Career not found.']);
     }
 }

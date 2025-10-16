@@ -10,7 +10,7 @@
 
         .login-header {
             font-size: 2rem;
-            background: linear-gradient(90deg, #28a745, #0d6efd);
+            background: black;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: bold;
@@ -70,18 +70,18 @@
                                 </div>
 
                                 <div class="d-grid mb-3">
-                                    <button type="submit" class="btn btn-success">
+                                    <button type="submit" class="btn btn-dark">
                                         {{ __('Login') }}
                                     </button>
                                 </div>
 
-                                @if (Route::has('password.request'))
+                                <!-- @if (Route::has('password.request'))
                                     <div class="text-center">
                                         <a class="btn btn-link" href="{{ route('password.request') }}">
                                             {{ __('Forgot Your Password?') }}
                                         </a>
                                     </div>
-                                @endif
+                                @endif -->
                             </form>
                         </div>
                     </div>

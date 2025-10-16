@@ -36,6 +36,12 @@
                  <span>Class Subject Mapping</span>
              </button>
          </form>
+         <form action="{{ route('test.create') }}" method="GET">
+             <button type="submit" class="menu-item">
+                 <i class="fas fa-users"></i>
+                 <span>Create Test</span>
+             </button>
+         </form>
          {{-- <div class="menu-item">
              <i class="fas fa-shopping-cart"></i>
              <span>Orders</span>
