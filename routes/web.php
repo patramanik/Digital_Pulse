@@ -145,6 +145,8 @@ Route::controller(TestController::class)->prefix('admin')->middleware('auth')->g
     Route::get('/test-create', 'TestCreate')->name('test.create');
     Route::get('/get-subjects/{classId}', 'getSubjectsByClass')->name('get.subjects');
     Route::get('/get-quizzes-by-class', 'getQuizzesByClass')->name('get.quizzes.by.class');
+    Route::post('/test-store', 'TestStore')->name('test.store');
+    Route::post('/schedule-test', 'scheduleTest')->name('schedule.test');
 });
 
 

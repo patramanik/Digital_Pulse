@@ -62,4 +62,26 @@ class TestController extends Controller
 
         return response()->json($quizzes);
     }
+
+    public function scheduleTest(Request $request)
+    {
+        $request->validate([
+            'quiz_ids' => 'required|array|min:1',
+            'quiz_ids.*' => 'exists:quiz,id',
+        ]);
+
+        $test = Test::create([
+            'title'        => 'Scheduled Test - ' . now()->format('Y-m-d H:i:s'),
+            'quiz_ids'     => $request->quiz_ids, // Model will auto-cast to JSON
+            'status'       => 'scheduled',
+            'scheduled_at' => now(),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Test scheduled successfully.',
+            'test'    => $test,
+        ], 201);
+    }
+
 }

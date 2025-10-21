@@ -165,30 +165,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Schedule Test button click
-    scheduleBtn.addEventListener('click', () => {
-        const selectedIds = Array.from(document.querySelectorAll('.quizCheckbox:checked')).map(cb => cb.value);
-        if (selectedIds.length === 0) {
-            alert('Please select at least one quiz to schedule.');
-            return;
-        }
+    // scheduleBtn.addEventListener('click', () => {
+    //     const selectedIds = Array.from(document.querySelectorAll('.quizCheckbox:checked')).map(cb => cb.value);
+    //     if (selectedIds.length === 0) {
+    //         alert('Please select at least one quiz to schedule.');
+    //         return;
+    //     }
+    //     fetch('/admin/schedule-test', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'X-CSRF-TOKEN': '{{ csrf_token() }}',
+    //         },
+    //         body: JSON.stringify({ quiz_ids: selectedIds })
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         alert('Test scheduled successfully!');
+    //         console.log('Scheduled quizzes:', data);
+    //     })
+    //     .catch(err => {
+    //         console.error('Error scheduling test:', err);
+    //         alert('Failed to schedule test.');
+    //     });
+    // });
 
-        // Example: Send selected quiz IDs to server
-        fetch('/admin/schedule-test', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+    $('#scheduleTestForm').on('submit', function(e) {
+        e.preventDefault();
+
+        let quiz_ids = [];
+        $('input[name="quiz_ids[]"]:checked').each(function() {
+            quiz_ids.push($(this).val());
+        });
+
+        $.ajax({
+            url: "{{ route('schedule.test') }}",
+            type: "POST",
+            data: {
+                quiz_ids: quiz_ids,
+                _token: "{{ csrf_token() }}"
             },
-            body: JSON.stringify({ quiz_ids: selectedIds })
-        })
-        .then(res => res.json())
-        .then(data => {
-            alert('Test scheduled successfully!');
-            console.log('Scheduled quizzes:', data);
-        })
-        .catch(err => {
-            console.error('Error scheduling test:', err);
-            alert('Failed to schedule test.');
+            success: function(response) {
+                Swal.fire('Success', response.success, 'success');
+            },
+            error: function(xhr) {
+                Swal.fire('Error', xhr.responseJSON.message || 'Something went wrong', 'error');
+            }
         });
     });
 });
