@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [ // This is the guard you will use for your API routes
+        'driver' => 'jwt', // Change to 'jwt'
+        'provider' => 'users',
+        ],
     ],
 
     /*
