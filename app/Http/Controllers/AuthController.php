@@ -7,35 +7,53 @@ use App\Models\User; // Don't forget to import the User model if you use the sho
 
 class AuthController extends Controller
 {
-    
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
-        // FIX 1: Explicitly use auth('api') for the JWT guard
-        if (!$token = auth('api')->attempt($credentials)) { 
+        // Validate input
+        $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string|min:6',
+        ]);
+
+        // Attempt login using JWT guard
+        if (!$token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return $this->respondWithToken($token);
+        // Return success response with token and user info
+        return response()->json([
+            'success' => true,
+            'message' => 'Login successful',
+            'user' => auth('api')->user(),
+            'token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth('api')->factory()->getTTL() * 60, // in seconds
+        ]);
     }
+
 
     public function register(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'class' => 'required|string|max:3',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
+        // dd($validatedData);
 
         $user = User::create([ // Use the imported User model
             'name' => $validatedData['name'],
+            'class' => $validatedData['class'],
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
         ]);
 
         // FIX 2: Explicitly use auth('api') for the JWT guard
-        $token = auth('api')->login($user); 
+        $token = auth('api')->login($user);
 
         // $this->respondWithToken($token);
 
@@ -45,13 +63,15 @@ class AuthController extends Controller
                 'user' => $user,
                 'access_token' => $token,
                 'token_type' => 'bearer',
-             ], 201);
+            ],
+            201
+        );
     }
 
     public function me()
     {
         // FIX 3: Explicitly use auth('api') for the JWT guard
-        return response()->json(auth('api')->user()); 
+        return response()->json(auth('api')->user());
     }
 
     public function logout()
@@ -74,7 +94,7 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             // FIX 6: Explicitly use auth('api') to access the JWT guard's factory method
-            'expires_in' => auth('api')->factory()->getTTL() * 60 
+            'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }
 }
