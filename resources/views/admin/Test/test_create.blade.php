@@ -35,7 +35,7 @@
         </div>
 
         <div class="col-md-3 d-flex align-items-end">
-            <button id="scheduleTestBtn" class="btn btn-success w-100">Schedule Test</button>
+            <button id="scheduleTestBtn" class="btn btn-success w-100">Create Set</button>
         </div>
     </div>
 
@@ -69,12 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const subjectSelect = document.getElementById('subject_id');
     const levelFilter = document.getElementById('level_filter');
     const tableBody = document.getElementById('quizTableBody');
-    const scheduleBtn = document.getElementById('scheduleTestBtn');
     const selectAllCheckbox = document.getElementById('selectAll');
+    const scheduleBtn = document.getElementById('scheduleTestBtn');
+    const form = document.getElementById('scheduleTestForm');
 
-    let allQuizzes = []; // Store all quizzes for frontend filtering
+    let allQuizzes = [];
 
-    // Fetch subjects when class changes
+    // Load subjects by class
     classSelect.addEventListener('change', () => {
         const classId = classSelect.value;
         subjectSelect.innerHTML = '<option value="">Loading...</option>';
@@ -99,32 +100,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     subjectSelect.appendChild(option);
                 });
                 subjectSelect.disabled = false;
-            })
-            .catch(err => {
-                console.error('Error fetching subjects:', err);
-                subjectSelect.innerHTML = '<option value="">Error loading subjects</option>';
             });
-
-        tableBody.innerHTML = '';
-        allQuizzes = [];
     });
 
-    // Fetch quizzes when subject changes
+    // Load quizzes when subject changes
     subjectSelect.addEventListener('change', () => {
         const classId = classSelect.value;
         const subjectId = subjectSelect.value;
-
         if (!classId || !subjectId) return;
 
         fetch(`{{ route('get.quizzes.by.class') }}?class_id=${classId}&subject_id=${subjectId}`)
             .then(res => res.json())
             .then(quizzes => {
-                allQuizzes = quizzes; // Save for frontend filtering
+                allQuizzes = quizzes;
                 renderQuizzes(quizzes);
-            })
-            .catch(err => {
-                console.error('Error fetching quizzes:', err);
-                tableBody.innerHTML = '<tr><td colspan="9">Error loading quizzes</td></tr>';
             });
     });
 
@@ -135,14 +124,14 @@ document.addEventListener('DOMContentLoaded', () => {
         renderQuizzes(filtered);
     });
 
-    // Render quizzes in table
+    // Render quizzes
     function renderQuizzes(quizzes) {
         tableBody.innerHTML = '';
-        quizzes.forEach((quiz, index) => {
+        quizzes.forEach((quiz, i) => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td><input type="checkbox" class="quizCheckbox" value="${quiz.id}"></td>
-                <td>${index + 1}</td>
+                <td><input type="checkbox" name="quiz_ids[]" value="${quiz.id}" class="quizCheckbox"></td>
+                <td>${i + 1}</td>
                 <td>${quiz.class_subject.class.class_name}</td>
                 <td>${quiz.class_subject.subject.subject_name}</td>
                 <td>${quiz.question}</td>
@@ -153,66 +142,79 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             tableBody.appendChild(tr);
         });
-
-        // Reset "select all" checkbox
         selectAllCheckbox.checked = false;
     }
 
-    // Select/Deselect all checkboxes
+    // Select all checkboxes
     selectAllCheckbox.addEventListener('change', () => {
-        const checkboxes = document.querySelectorAll('.quizCheckbox');
-        checkboxes.forEach(cb => cb.checked = selectAllCheckbox.checked);
+        document.querySelectorAll('.quizCheckbox').forEach(cb => cb.checked = selectAllCheckbox.checked);
     });
 
-    // Schedule Test button click
-    // scheduleBtn.addEventListener('click', () => {
-    //     const selectedIds = Array.from(document.querySelectorAll('.quizCheckbox:checked')).map(cb => cb.value);
-    //     if (selectedIds.length === 0) {
-    //         alert('Please select at least one quiz to schedule.');
-    //         return;
-    //     }
-    //     fetch('/admin/schedule-test', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'X-CSRF-TOKEN': '{{ csrf_token() }}',
-    //         },
-    //         body: JSON.stringify({ quiz_ids: selectedIds })
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         alert('Test scheduled successfully!');
-    //         console.log('Scheduled quizzes:', data);
-    //     })
-    //     .catch(err => {
-    //         console.error('Error scheduling test:', err);
-    //         alert('Failed to schedule test.');
-    //     });
-    // });
+    // 🔥 Create Set button
+   scheduleBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
 
-    $('#scheduleTestForm').on('submit', function(e) {
-        e.preventDefault();
+    const selected = Array.from(document.querySelectorAll('.quizCheckbox:checked')).map(cb => cb.value);
+    const classId = document.getElementById('class_id').value;
+    const subjectId = document.getElementById('subject_id').value;
 
-        let quiz_ids = [];
-        $('input[name="quiz_ids[]"]:checked').each(function() {
-            quiz_ids.push($(this).val());
-        });
+    if (!classId || !subjectId) {
+        Swal.fire('Warning', 'Please select class and subject.', 'warning');
+        return;
+    }
 
-        $.ajax({
-            url: "{{ route('schedule.test') }}",
-            type: "POST",
-            data: {
-                quiz_ids: quiz_ids,
-                _token: "{{ csrf_token() }}"
-            },
-            success: function(response) {
-                Swal.fire('Success', response.success, 'success');
-            },
-            error: function(xhr) {
-                Swal.fire('Error', xhr.responseJSON.message || 'Something went wrong', 'error');
+    if (selected.length === 0) {
+        Swal.fire('Warning', 'Please select at least one quiz.', 'warning');
+        return;
+    }
+
+    // ✅ Ask user for custom title using SweetAlert input
+    const { value: title } = await Swal.fire({
+        title: 'Enter Test Title',
+        input: 'text',
+        inputPlaceholder: 'e.g., Mathematics Chapter 1 Test',
+        showCancelButton: true,
+        confirmButtonText: 'Create',
+        cancelButtonText: 'Cancel',
+        inputValidator: (value) => {
+            if (!value) {
+                return 'Please enter a title!';
             }
-        });
+        }
+    });
+
+    if (!title) return; // User cancelled or left blank
+
+    // ✅ Proceed with AJAX request
+    fetch(`{{ route('schedule.test') }}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({
+            title: title,
+            quiz_ids: selected,
+            class_id: classId,
+            subject_id: subjectId
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire('Success', data.success, 'success');
+        } else {
+            Swal.fire('Error', data.message || 'Something went wrong', 'error');
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        Swal.fire('Error', 'Failed to create test set', 'error');
     });
 });
+
+});
 </script>
+
+
 @endsection

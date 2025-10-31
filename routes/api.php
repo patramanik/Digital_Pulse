@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TestController;
 
 // --------------------------------------------------------------------------
 // JWT AUTH ROUTES (Public Access)
@@ -21,6 +22,8 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::get('me', [AuthController::class, 'me']);
 
+
+     Route::get('quizzes', [TestController::class, 'getTestQuizzes']);
     // Your other API endpoints...
     Route::get('protected-resource', function () {
         return response()->json(['message' => 'This is a secured resource.']);

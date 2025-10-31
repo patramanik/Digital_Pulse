@@ -147,6 +147,8 @@ Route::controller(TestController::class)->prefix('admin')->middleware('auth')->g
     Route::get('/get-quizzes-by-class', 'getQuizzesByClass')->name('get.quizzes.by.class');
     Route::post('/test-store', 'TestStore')->name('test.store');
     Route::post('/schedule-test', 'scheduleTest')->name('schedule.test');
+    // Route::post('/admin/schedule-test', 'scheduleTest')->name('schedule.test');
+
 });
 
 
